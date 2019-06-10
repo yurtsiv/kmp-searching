@@ -1,9 +1,15 @@
 import unittest
-from search.search import kmp_search
+from search.search import kmp_search, prepare_lps
 
 
-class SearchTest(unittest.TestCase):
-  def search_test(self):
+class TestSearch(unittest.TestCase):
+  def test_prepare_lps(self):
+    self.assertEqual(
+      prepare_lps("participate in parachute"),
+      [-1, 0, 0, 0, 0, 0, 0, -1, 0, 2, 0, 0, 0, 0, 0, -1, 0, 0, 3, 0, 0, 0, 0, 0, 0]
+    )
+
+  def test_search(self):
     string = """Lorem ipsum dodolor sit amet, consectetur adipiscing elit,
                 sed do eiusmod tempor incididunt ut labore et dodolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
