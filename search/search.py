@@ -43,7 +43,7 @@ def kmp_search(string, pattern):
   if len(pattern) == 0:
     raise Exception("Provided pattern is empty")
 
-  if len(string) == 0:
+  if len(string) == 0 or len(pattern) > len(string):
     return []
 
   result = []

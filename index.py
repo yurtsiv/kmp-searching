@@ -13,10 +13,11 @@ def print_result(matches):
 
     output_str += line_res + "\n"
 
-  print("\nFound " + str(matches_num) + " matches\n")
-  print("Line number | Positions")
-  print("-----------------------")
-  print(output_str)
+  print("\nMatches found: " + str(matches_num) + "\n")
+  if matches_num:
+    print("Line number | Positions")
+    print("-----------------------")
+    print(output_str)
 
 
 argv = sys.argv
