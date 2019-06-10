@@ -38,8 +38,14 @@ def search_one_line(string, pattern, lps):
       j = lps[j]
 
   return positions
-  
+
 def kmp_search(string, pattern):
+  if len(pattern) == 0:
+    raise Exception("Provided pattern is empty")
+
+  if len(string) == 0:
+    return []
+
   result = []
   lines = string.split("\n")
   lps = prepare_lps(pattern)

@@ -22,7 +22,7 @@ def print_result(matches):
 argv = sys.argv
 
 help_text = """
-Usage:
+Usasitge:
 
 python index.py file.txt | 'string to match' 'pattern'
 """
@@ -34,9 +34,13 @@ if len(argv) != 3:
 match_target = argv[1]
 pattern = argv[2]
 
-if '.txt' in match_target:
-  result = kmp_search(open(match_target, 'r').read(), pattern)
-  print_result(result)
-else:
-  result = kmp_search(match_target, pattern)
-  print_result(result)
+try:
+  if '.txt' in match_target:
+    result = kmp_search(open(match_target, 'r').read(), pattern)
+    print_result(result)
+  else:
+    result = kmp_search(match_target, pattern)
+    print_result(result)
+except Exception as e:
+  print(e)
+  sys.exit(0)
