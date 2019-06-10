@@ -13,17 +13,17 @@ def print_result(matches):
 
     output_str += line_res + "\n"
 
-  print("\nMatches found: " + str(matches_num) + "\n")
   if matches_num:
     print("Line number | Positions")
     print("-----------------------")
     print(output_str)
 
+  print("\nTotal matches: " + str(matches_num) + "\n")
+
 
 argv = sys.argv
-
 help_text = """
-Usasitge:
+Usage:
 
 python index.py file.txt | 'string to match' 'pattern'
 """

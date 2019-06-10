@@ -52,9 +52,10 @@ def kmp_search(string, pattern):
 
   for i in range(0, len(lines)):
     positions = search_one_line(lines[i], pattern, lps)
-    result.append(
-      # (line num, [match position])
-      (i + 1, positions)
-    )
+    if len(positions):
+      result.append(
+        # (line num, [match position])
+        (i + 1, positions)
+      )
 
   return result
