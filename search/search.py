@@ -14,7 +14,7 @@ def prepare_lps(pattern):
 
   return [0] + lps
 
-def search_one_line(string, pattern, lps, line_num):
+def search_one_line(string, pattern, lps):
   positions = []
 
   n = len(string)
@@ -26,6 +26,7 @@ def search_one_line(string, pattern, lps, line_num):
   for i in range(0, len(string)):
     pattern_char = pattern[j+1]
     string_char = string[i]
+
     while j > 0 and pattern_char != string_char:
       j = lps[j]
  
@@ -33,7 +34,7 @@ def search_one_line(string, pattern, lps, line_num):
       j += 1
  
     if j == m:
-      positions.append((line_num, (i - m) + 2))
+      positions.append((i - m) + 2)
       j = lps[j]
 
   return positions
@@ -44,8 +45,10 @@ def kmp_search(string, pattern):
   lps = prepare_lps(pattern)
 
   for i in range(0, len(lines)):
-    result.extend(
-      search_one_line(lines[i], pattern, lps, i + 1)
+    positions = search_one_line(lines[i], pattern, lps)
+    result.append(
+      # (line num, [match position])
+      (i + 1, positions)
     )
 
   return result

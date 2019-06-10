@@ -1,13 +1,42 @@
+import sys
 from search.search import kmp_search
 
+def print_result(matches):
+  output_str = ""
+  matches_num = 0
 
-string = """Lorem ipsum dodolor sit amet, consectetur adipiscing elit,
-sed do eiusmod tempor incididunt ut labore et dodolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-aliquip ex ea commodo consequat. Duis aute irure dodolor in reprehenderit in
-voluptate velit esse cillum dodolore eu fugiat nulla pariatur. Excepteur sint
-occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."""
+  for line_matches in matches:
+    matches_num += len(line_matches[1])
+    line_res = "%11d |" % line_matches[0]
+    for position in line_matches[1]:
+      line_res += " %d" % position
 
-pattern = "dodolor"
+    output_str += line_res + "\n"
 
-kmp_search(string, pattern)
+  print("\nFound " + str(matches_num) + " matches\n")
+  print("Line number | Positions")
+  print("-----------------------")
+  print(output_str)
+
+
+argv = sys.argv
+
+help_text = """
+Usage:
+
+python index.py file.txt | 'string to match' 'pattern'
+"""
+
+if len(argv) != 3:
+  print("Incorrect number of arguments provided\n" + help_text)
+  sys.exit(0)
+
+match_target = argv[1]
+pattern = argv[2]
+
+if '.txt' in match_target:
+  result = kmp_search(open(match_target, 'r').read(), pattern)
+  print_result(result)
+else:
+  result = kmp_search(match_target, pattern)
+  print_result(result)
